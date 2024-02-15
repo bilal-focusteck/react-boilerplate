@@ -7,6 +7,9 @@ import './App.css';
 import Register from './components/Register';
 import navbarComponent from './components/navbarComponent';
 import HomeComponent from './components/HomeComponent';
+import LoginComponent from './components/LoginComponent';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   // const router = createBrowserRouter([
@@ -20,12 +23,16 @@ function App() {
   //   }
   // ])
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path='/' Component={HomeComponent} />
-        <Route path='/navbar' Component={navbarComponent} />
-        <Route path='/signup' Component={Register} />
-        {/* <Route Component={Layout}>
+    <div>
+      <ToastContainer />
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' Component={HomeComponent} />
+          <Route path='/navbar' Component={navbarComponent} />
+          <Route path='/signup' Component={Register} />
+          <Route path='/login' Component={LoginComponent} />
+
+          {/* <Route Component={Layout}>
           <Route path='/dashboard' Component={Dashboard} />
           <Route path='/projects' Component={Projects} />
           <Route path='/resources' Component={Resources} />
@@ -34,13 +41,9 @@ function App() {
           <Route path='/integrations' Component={Integrations} />
           <Route path='/test' Component={Test} />
         </Route> */}
-      </Routes>
-    </BrowserRouter>
-    // ReactDOM.createRoot(document.getElementById('root')).render(
-    //   <React.StrictMode>
-    //     <RouterProvider router={router} />
-    //   </React.StrictMode>
-    // )
+        </Routes>
+      </BrowserRouter>
+    </div>
     // <div className="App">
     //   <header className="App-header">
     //     <img src={logo} className="App-logo" alt="logo" />
