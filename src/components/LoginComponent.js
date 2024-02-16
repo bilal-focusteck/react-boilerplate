@@ -43,6 +43,8 @@ export default function Login() {
         console.log("data from form: ", data)
 
         if (data.statusCode === 200 || data.statusCode === 201) {
+          console.log("data.token value is: ", data.token);
+          localStorage.setItem('token', data.token);
           toast.success(`Logged in successfully`, { autoClose: 3000 });
           setTimeout(() => {
             navigate('/');

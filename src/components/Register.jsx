@@ -19,6 +19,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { checkDataFormat } from '../middlewares/CheckCredentials';
 
 const defaultTheme = createTheme();
 
@@ -53,6 +54,13 @@ export default function SignUp() {
     validationSchema: validationSchema,
     onSubmit: async (values) => {
       try {
+        const { email, hashedPassword } = values;
+        const { msg, email: emailError, password: passwordError } = checkDataFormat(email, hashedPassword);
+
+        if (emailError || passwordError) {
+          toast.error(msg, { autoClose: 3000 });
+          return;
+        }
         const { data } = await axios.post(signUpRoute, {
           firstName: values.firstName,
           lastName: values.lastName,
