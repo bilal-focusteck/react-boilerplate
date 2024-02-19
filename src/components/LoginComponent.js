@@ -1,4 +1,5 @@
 import React from 'react';
+import { useContext } from 'react';
 import { useNavigate } from 'react-router';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -15,8 +16,9 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
-import Avatar from '@mui/material/Avatar'; // Import the Avatar component
+import Avatar from '@mui/material/Avatar';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import { useAuth } from '../hooks/AuthContext';
 
 const defaultTheme = createTheme();
 
@@ -27,6 +29,7 @@ const validationSchema = Yup.object().shape({
 
 export default function Login() {
   const navigate = useNavigate();
+  const { login } = useAuth();
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -45,7 +48,9 @@ export default function Login() {
         if (data.statusCode === 200 || data.statusCode === 201) {
           console.log("data.token value is: ", data.token);
           localStorage.setItem('token', data.token);
+          login();
           toast.success(`Logged in successfully`, { autoClose: 3000 });
+          console.log("login state: ", login)
           setTimeout(() => {
             navigate('/');
           }, 3000);
@@ -115,11 +120,6 @@ export default function Login() {
                 Sign In
               </Button>
               <Grid container justifyContent={'flex-end'}>
-                {/* <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid> */}
                 <Grid item>
                   <Link href="/signup" variant="body2">
                     {"Don't have an account? Sign Up"}

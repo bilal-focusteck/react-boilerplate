@@ -10,6 +10,7 @@ import HomeComponent from './components/HomeComponent';
 import LoginComponent from './components/LoginComponent';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { AuthProvider } from './hooks/AuthContext';
 
 function App() {
   // const router = createBrowserRouter([
@@ -24,15 +25,16 @@ function App() {
   // ])
   return (
     <div>
-      <ToastContainer />
-      <BrowserRouter>
-        <Routes>
-          <Route path='/' Component={HomeComponent} />
-          <Route path='/navbar' Component={navbarComponent} />
-          <Route path='/signup' Component={Register} />
-          <Route path='/login' Component={LoginComponent} />
+      <AuthProvider>
+        <ToastContainer />
+        <BrowserRouter>
+          <Routes>
+            <Route path='/' Component={HomeComponent} />
+            <Route path='/navbar' Component={navbarComponent} />
+            <Route path='/signup' Component={Register} />
+            <Route path='/login' Component={LoginComponent} />
 
-          {/* <Route Component={Layout}>
+            {/* <Route Component={Layout}>
           <Route path='/dashboard' Component={Dashboard} />
           <Route path='/projects' Component={Projects} />
           <Route path='/resources' Component={Resources} />
@@ -41,25 +43,10 @@ function App() {
           <Route path='/integrations' Component={Integrations} />
           <Route path='/test' Component={Test} />
         </Route> */}
-        </Routes>
-      </BrowserRouter>
+          </Routes>
+        </BrowserRouter>
+      </AuthProvider>
     </div>
-    // <div className="App">
-    //   <header className="App-header">
-    //     <img src={logo} className="App-logo" alt="logo" />
-    //     <p>
-    //       Edit <code>src/App.js</code> and save to reload.
-    //     </p>
-    //     <a
-    //       className="App-link"
-    //       href="https://reactjs.org"
-    //       target="_blank"
-    //       rel="noopener noreferrer"
-    //     >
-    //       Learn React
-    //     </a>
-    //   </header>
-    // </div>
   );
 }
 
