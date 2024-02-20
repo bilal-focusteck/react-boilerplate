@@ -2,7 +2,7 @@ const host = "http://localhost:3500"
 export const signUpRoute = `${host}/api/users/signUp`
 export const loginRoute = `${host}/api/users/login`
 export const updateUserRoute = `${host}/api/users/update-user?id=id`
-export const deleteUserRoute = `${host}/api/users/delete-user?id=id`
+export const deleteUserRoute = `${host}/api/users/delete-user`
 export const getAllUsersRoute = `${host}/api/users/get-all-users`
 export const getUserByIdRoute = `${host}/api/users/get-user-by-id?id=id`
 export const logoutRoute = `${host}/api/users/logout`

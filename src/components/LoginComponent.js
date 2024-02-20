@@ -119,6 +119,11 @@ export default function Login() {
               >
                 Sign In
               </Button>
+              <ToastContainer
+                position="top-right"
+              />
+              {/* Same as */}
+              <ToastContainer />
               <Grid container justifyContent={'flex-end'}>
                 <Grid item>
                   <Link href="/signup" variant="body2">
