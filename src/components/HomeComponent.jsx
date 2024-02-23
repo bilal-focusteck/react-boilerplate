@@ -15,14 +15,20 @@ import TableRow from '@mui/material/TableRow';
 
 const HomeComponent = () => {
   const navigate = useNavigate();
-  const { logout } = useAuth();
+  const { isLoggedIn, logout } = useAuth();
   const [users, setUsers] = useState([]);
-
+  console.log("isloggedin value coming in home component MAIN: ", isLoggedIn);
   useEffect(() => {
-    fetchUsers();
-  }, []);
+    if (isLoggedIn) {
+      fetchUsers();
+    }
+  }, [isLoggedIn]);
 
   const fetchUsers = () => {
+    if (!isLoggedIn) {
+      toast.error("You're not logged in.");
+      return;
+    }
     axios.get(getAllUsersRoute)
       .then(response => {
         console.log("response object: ", response.data)
@@ -34,6 +40,10 @@ const HomeComponent = () => {
   };
 
   const handleLogout = () => {
+    if (!isLoggedIn) {
+      toast.error("You're not logged in.");
+      return;
+    }
     toast.info(
       <div>
         <span>Are you sure you want to logout?</span>
@@ -57,6 +67,10 @@ const HomeComponent = () => {
   };
 
   const confirmLogout = () => {
+    if (!isLoggedIn) {
+      toast.error("You're not logged in.");
+      return;
+    }
     axios.post(logoutRoute)
       .then(() => {
         localStorage.removeItem('token');
@@ -69,6 +83,10 @@ const HomeComponent = () => {
       });
   };
   const handleDeleteUser = (id) => {
+    if (!isLoggedIn) {
+      toast.error("You're not logged in.");
+      return;
+    }
     axios.delete(`${deleteUserRoute}?id=${id}`)
       .then(() => {
         toast.success('User deleted successfully');
